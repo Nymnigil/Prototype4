@@ -4,26 +4,23 @@ using UnityEngine;
 
 public class spawnFor : MonoBehaviour
 {
-    public float spawnRandom;
-    public GameObject enemyPref;
+    private float spawnRandom;
+    private GameObject enemyPref, bonusPref;
     private int enemCounter;
-    public int waveCounter = 1;
+    private int waveCounter = 2;
     
-
-    // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("BonusSpawn", 5f, 6f);
         enemyPref = Resources.Load<GameObject>("Prefabs/EnemyPref");
-        Spawn(3);
-
+        bonusPref= Resources.Load<GameObject>("Prefabs/Bonus");
+        Spawn(1);
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         enemCounter = FindObjectsOfType<enemyGo>().Length;
         //ищет по скрипту
-        Debug.Log(enemCounter + " enemies");
         if (enemCounter<1)
         {
             Spawn(waveCounter);
@@ -45,5 +42,10 @@ public class spawnFor : MonoBehaviour
         {
             Instantiate(enemyPref, spawnPos(), enemyPref.transform.rotation);
         }
+    }
+
+    void BonusSpawn() 
+    {
+        Instantiate(bonusPref, spawnPos(), bonusPref.transform.rotation);
     }
 }

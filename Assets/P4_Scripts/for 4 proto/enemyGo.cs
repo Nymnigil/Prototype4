@@ -10,17 +10,10 @@ public class enemyGo : MonoBehaviour
     private Vector3 direct;
     public int destroyPoint = -3;
 
-    // Start is called before the first frame update
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Sphere");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void FixedUpdate()
@@ -30,7 +23,6 @@ public class enemyGo : MonoBehaviour
         if (transform.position.y< destroyPoint)
         {
             Destroy(gameObject);
-            Debug.Log("enemy deleted");
         }
     }
 }
